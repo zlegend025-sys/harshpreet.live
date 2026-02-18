@@ -1,74 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Harshpreet | Gamer & Future Developer</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #050816;
-      color: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-    }
-    .card {
-      max-width: 480px;
-      padding: 24px 28px;
-      border-radius: 16px;
-      background: #111827;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      text-align: center;
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 1.8rem;
-    }
-    h2 {
-      font-size: 1.1rem;
-      font-weight: normal;
-      color: #9ca3af;
-    }
-    .tag {
-      display: inline-block;
-      margin: 8px 4px 16px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid #374151;
-      font-size: 0.8rem;
-      color: #e5e7eb;
-    }
-    p {
-      font-size: 0.95rem;
-      line-height: 1.5;
-      color: #d1d5db;
-    }
-    .small {
-      font-size: 0.8rem;
-      margin-top: 16px;
-      color: #6b7280;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Harshpreet</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #0b1220, #02040a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e5e7eb;
+  overflow: hidden;
+}
+
+/* Entry Screen */
+#enter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#enter.hidden {
+  opacity: 0;
+  transform: scale(1.1);
+  pointer-events: none;
+}
+
+/* Top Navigation */
+nav {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  display: flex;
+  gap: 18px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+nav a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+/* Main Card */
+.card {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 32px;
+  width: 340px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.subtitle {
+  margin: 6px 0 18px;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+button {
+  background: transparent;
+  border: 1px solid #374151;
+  color: #e5e7eb;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #111827;
+}
+
+/* Socials Panel */
+#socials {
+  margin-top: 16px;
+  display: none;
+  gap: 10px;
+  justify-content: center;
+}
+
+#socials a {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  text-decoration: none;
+}
+
+#socials a:hover {
+  color: #fff;
+}
+</style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>Harshpreet</h1>
-    <h2>Gamer • Learning HTML, CSS & Java</h2>
-    <div>
-      <span class="tag">Future Portfolio</span>
-      <span class="tag">Open to game offers</span>
-    </div>
-    <p>
-      Hey! I’m a gamer starting my journey into coding.<br>
-      This site is temporary while I learn HTML and other tech.<br>
-      Soon this will become my full portfolio for gaming and development.
-    </p>
-    <p class="small">
-      Check back later for updates.<br>
-      Contact me: <b>harshpreet3d@gmail.com</b>
-    </p>
+
+<div id="enter">Click to enter</div>
+
+<nav id="nav">
+  <a href="https://discord.gg/dharamshala" target="_blank">Server</a>
+  <a href="#" onclick="toggleSocials()">Socials</a>
+</nav>
+
+<div class="card" id="card">
+  <h1>Harshpreet</h1>
+  <div class="subtitle">Gamer · Server Owner · Learning Web Dev</div>
+
+  <div class="buttons">
+    <button>Dharamshala SMP</button>
+    <button>Portfolio (soon)</button>
   </div>
+
+  <p style="font-size:0.85rem; color:#9ca3af;">
+    I run a whitelist-based Minecraft SMP called Dharamshala.
+    This site is my personal hub while I learn HTML, CSS, and other tech.
+  </p>
+
+  <div id="socials">
+    <a href="https://instagram.com/harshpreetbaidwan" target="_blank">Instagram</a>
+    <a href="https://steamcommunity.com/id/harshpreet" target="_blank">Steam</a>
+    <a href="https://youtube.com/@nang8282" target="_blank">YouTube</a>
+  </div>
+</div>
+
+<script>
+const enter = document.getElementById("enter");
+const card = document.getElementById("card");
+const nav = document.getElementById("nav");
+
+enter.onclick = () => {
+  enter.classList.add("hidden");
+  setTimeout(() => {
+    card.classList.add("visible");
+    nav.style.opacity = "1";
+  }, 400);
+};
+
+function toggleSocials() {
+  const socials = document.getElementById("socials");
+  socials.style.display = socials.style.display === "flex" ? "none" : "flex";
+}
+</script>
+
 </body>
 </html>
