@@ -22,24 +22,6 @@ body {
   overflow: hidden;
 }
 
-/* Entry Screen */
-#enter {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  cursor: pointer;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-#enter.hidden {
-  opacity: 0;
-  transform: scale(1.1);
-  pointer-events: none;
-}
-
 /* Top Navigation */
 nav {
   position: absolute;
@@ -48,7 +30,7 @@ nav {
   display: flex;
   gap: 18px;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  animation: fadeIn 1s ease forwards;
 }
 
 nav a {
@@ -70,13 +52,8 @@ nav a:hover {
   width: 340px;
   text-align: center;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.card.visible {
-  opacity: 1;
-  transform: translateY(0);
+  animation: slideUp 1s ease forwards;
+  animation-delay: 0.2s;
 }
 
 .card h1 {
@@ -116,7 +93,7 @@ button:hover {
 #socials {
   margin-top: 16px;
   display: none;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
 }
 
@@ -129,19 +106,33 @@ button:hover {
 #socials a:hover {
   color: #fff;
 }
+
+/* Animations */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 </style>
 </head>
 
 <body>
 
-<div id="enter">Click to enter</div>
-
-<nav id="nav">
+<nav>
   <a href="https://discord.gg/dharamshala" target="_blank">Server</a>
   <a href="#" onclick="toggleSocials()">Socials</a>
 </nav>
 
-<div class="card" id="card">
+<div class="card">
   <h1>Harshpreet</h1>
   <div class="subtitle">Gamer · Server Owner · Learning Web Dev</div>
 
@@ -163,18 +154,6 @@ button:hover {
 </div>
 
 <script>
-const enter = document.getElementById("enter");
-const card = document.getElementById("card");
-const nav = document.getElementById("nav");
-
-enter.onclick = () => {
-  enter.classList.add("hidden");
-  setTimeout(() => {
-    card.classList.add("visible");
-    nav.style.opacity = "1";
-  }, 400);
-};
-
 function toggleSocials() {
   const socials = document.getElementById("socials");
   socials.style.display = socials.style.display === "flex" ? "none" : "flex";
