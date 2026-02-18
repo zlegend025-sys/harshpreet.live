@@ -14,6 +14,14 @@ The main goal of this website is to act as:
 
 I plan to continuously update and improve this site as I learn new technologies and build more projects.
 
+## Screenshots
+
+### Website
+![Website](./screenshots/website.png)
+
+### Dharamshala SMP
+![Dharamshala SMP](./screenshots/dharamshala-smp.png)
+
 ## Current Features
 
 - Personal landing page
