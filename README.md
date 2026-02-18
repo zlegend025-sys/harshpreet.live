@@ -17,7 +17,7 @@ I plan to continuously update and improve this site as I learn new technologies 
 ## Screenshots
 
 ### Website
-![Website](./screenshots/website.png)
+![Website](./screenshots/home.png)
 
 ### Dharamshala SMP
 ![Dharamshala SMP](./screenshots/dharamshala-smp.png)
