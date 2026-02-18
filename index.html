@@ -1,233 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Harshpreet singh</title>
+  <meta charset="UTF-8">
+  <title>Dharamshala SMP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-:root {
-  --bg1: #020617;
-  --bg2: #02040a;
-  --glass: rgba(15, 23, 42, 0.65);
-  --border: rgba(255, 255, 255, 0.08);
-  --text-dim: #94a3b8;
-  --accent: #38bdf8;
-}
+  <!-- Minecraft font -->
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
-* {
-  box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-body {
-  margin: 0;
-  height: 100vh;
-  background:
-    radial-gradient(circle at top, #0b1220, var(--bg2)),
-    radial-gradient(circle at bottom right, #020617, #000);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #e5e7eb;
-  overflow: hidden;
-}
-
-/* NAV */
-nav {
-  position: absolute;
-  top: 22px;
-  right: 28px;
-  display: flex;
-  gap: 22px;
-  opacity: 0;
-  animation: fadeDown 1s ease forwards;
-}
-
-nav a {
-  color: var(--text-dim);
-  text-decoration: none;
-  font-size: 0.95rem;
-  position: relative;
-}
-
-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0;
-  height: 2px;
-  background: var(--accent);
-  transition: width 0.3s ease;
-}
-
-nav a:hover {
-  color: #fff;
-}
-
-nav a:hover::after {
-  width: 100%;
-}
-
-/* CARD */
-.card {
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.04),
-    rgba(255,255,255,0.01)
-  ), var(--glass);
-  backdrop-filter: blur(22px);
-  border-radius: 20px;
-  padding: 36px;
-  width: 360px;
-  text-align: center;
-  border: 1px solid var(--border);
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.02),
-    0 30px 80px rgba(0,0,0,0.7),
-    0 0 40px rgba(56,189,248,0.08);
-  opacity: 0;
-  transform: translateY(30px);
-  animation: rise 1s ease forwards;
-  animation-delay: 0.2s;
-}
-
-.card h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  letter-spacing: 0.3px;
-}
-
-.subtitle {
-  margin: 8px 0 22px;
-  color: var(--text-dim);
-  font-size: 0.9rem;
-}
-
-/* BUTTONS */
-.buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-bottom: 22px;
-}
-
-button {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  color: #e5e7eb;
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  border-color: rgba(56,189,248,0.6);
-  box-shadow: 0 0 20px rgba(56,189,248,0.25);
-}
-
-/* TEXT */
-.card p {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  line-height: 1.6;
-}
-
-/* SOCIALS */
-#socials {
-  margin-top: 18px;
-  display: none;
-  gap: 16px;
-  justify-content: center;
-  animation: fadeUp 0.4s ease forwards;
-}
-
-#socials a {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  text-decoration: none;
-  transition: color 0.25s ease, text-shadow 0.25s ease;
-}
-
-#socials a:hover {
-  color: #fff;
-  text-shadow: 0 0 12px rgba(56,189,248,0.6);
-}
-
-/* ANIMATIONS */
-@keyframes rise {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-<nav>
-  <a href="https://discord.gg/dharamshala" target="_blank">Server</a>
-  <a href="#" onclick="toggleSocials()">Socials</a>
-</nav>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <img
+        class="skin"
+        src="https://mc-heads.net/body/wdsvv"
+        alt="Minecraft Skin">
 
-<div class="card">
-  <h1>Harshpreet</h1>
-  <div class="subtitle">Gamer · Server Owner · Learning Web Dev</div>
+      <div class="hero-text">
+        <h1>Dharamshala SMP</h1>
+        <p class="tagline">A community-driven Minecraft Survival SMP</p>
 
-  <div class="buttons">
-   <button onclick="window.open('https://server.harshpreet.live', '_blank')">
-  Dharamshala SMP
-</button>
-    <button disabled style="opacity:0.5; cursor:not-allowed;">
-      Portfolio (soon)
-    </button>
-  </div>
+        <p class="welcome">
+          Welcome! I’m the owner of Dharamshala SMP.
+          This server is built around fair play, long-term worlds,
+          and a chill Punjabi-friendly community.
+          If you’re looking for a clean SMP experience — you’re in the right place.
+        </p>
 
-  <p>
-    I run a whitelist-based Minecraft SMP called <b>Dharamshala</b>.
-    This site is my personal hub while I learn HTML, CSS, and modern web tech.
-  </p>
+        <div class="hero-buttons">
+          <a class="btn" href="https://discord.gg/dharamshala" target="_blank">Join Discord</a>
+          <a class="btn outline" href="https://reddit.com/r/PanjabiGamers" target="_blank">Reddit Community</a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-  <div id="socials">
-    <a href="https://instagram.com/harshpreetbaidwan" target="_blank">Instagram</a>
-    <a href="https://steamcommunity.com/id/harshpreet" target="_blank">Steam</a>
-    <a href="https://youtube.com/@nang8282" target="_blank">YouTube</a>
-  </div>
-</div>
+  <!-- CONTENT -->
+  <main class="content">
 
-<script>
-function toggleSocials() {
-  const socials = document.getElementById("socials");
-  socials.style.display = socials.style.display === "flex" ? "none" : "flex";
-}
-</script>
+    <!-- ABOUT -->
+    <section>
+      <h2>About the Server</h2>
+      <p>
+        Dharamshala SMP is a survival server focused on
+        community, creativity, and long-term progression.
+        No pay-to-win, no chaos — just proper survival.
+      </p>
+    </section>
+
+    <!-- STATUS (placeholder, ready for real data later) -->
+    <section class="status">
+      <h2>Server Status</h2>
+      <div class="status-grid">
+        <div class="status-box">
+          <span class="status-label">Players Online</span>
+          <span class="status-value">—</span>
+        </div>
+        <div class="status-box">
+          <span class="status-label">Discord Members</span>
+          <span class="status-value">—</span>
+        </div>
+      </div>
+      <p class="status-note">
+        Live stats coming soon.
+      </p>
+    </section>
+
+    <!-- SCREENSHOTS -->
+    <section>
+      <h2>Server Screenshots</h2>
+      <div class="gallery">
+        <img src="images/ss1.jpg" alt="Screenshot 1">
+        <img src="images/ss2.jpg" alt="Screenshot 2">
+        <img src="images/ss3.jpg" alt="Screenshot 3">
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© Dharamshala SMP</p>
+    <a href="https://harshpreet.live" target="_blank">Back to Portfolio</a>
+  </footer>
 
 </body>
 </html>
