@@ -2,52 +2,73 @@ const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
 const grid = 20;
-
 let count = 0;
-let speed = 18;
+
+let baseSpeed = 14;
+let speed = baseSpeed;
+
+let state = "start";
 
 let score = 0;
+let highScore = localStorage.getItem("snakeHigh") || 0;
 
 let snake = {
-x:160,
-y:160,
-dx:grid,
-dy:0,
-cells:[],
-maxCells:4
+x: 200,
+y: 200,
+dx: grid,
+dy: 0,
+cells: [],
+maxCells: 4
 };
 
 let apple = {
-x:320,
-y:320
+x: 300,
+y: 300
 };
 
-function getRandomInt(min,max){
-return Math.floor(Math.random()*(max-min))+min;
+function randomPos(){
+return Math.floor(Math.random()*20)*grid;
 }
 
 function resetGame(){
 
-snake.x = 160;
-snake.y = 160;
+snake.x = 200;
+snake.y = 200;
 snake.cells = [];
 snake.maxCells = 4;
 snake.dx = grid;
 snake.dy = 0;
 
 score = 0;
-speed = 8;
+speed = baseSpeed;
 
-document.getElementById("score").innerText = "Score: 0";
+apple.x = randomPos();
+apple.y = randomPos();
 
-apple.x = getRandomInt(0,20)*grid;
-apple.y = getRandomInt(0,20)*grid;
+state = "playing";
 
 }
 
-function loop(){
+function drawText(text,size,y){
+ctx.fillStyle = "white";
+ctx.font = size + "px monospace";
+ctx.textAlign = "center";
+ctx.fillText(text, canvas.width/2, y);
+}
 
-requestAnimationFrame(loop);
+function gameLoop(){
+
+requestAnimationFrame(gameLoop);
+
+if(state !== "playing"){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+drawText("SNAKE",50,150);
+drawText("Press Arrow Key To Start",20,200);
+drawText("High Score: " + highScore,18,240);
+
+return;
+}
 
 if(++count < speed){
 return;
@@ -60,47 +81,50 @@ ctx.clearRect(0,0,canvas.width,canvas.height);
 snake.x += snake.dx;
 snake.y += snake.dy;
 
-if(snake.x < 0) snake.x = canvas.width - grid;
-else if(snake.x >= canvas.width) snake.x = 0;
+if(snake.x < 0) snake.x = canvas.width-grid;
+if(snake.x >= canvas.width) snake.x = 0;
 
-if(snake.y < 0) snake.y = canvas.height - grid;
-else if(snake.y >= canvas.height) snake.y = 0;
+if(snake.y < 0) snake.y = canvas.height-grid;
+if(snake.y >= canvas.height) snake.y = 0;
 
 snake.cells.unshift({x:snake.x,y:snake.y});
 
-if(snake.cells.length > snake.maxCells){
+if(snake.cells.length > Math.floor(snake.maxCells)){
 snake.cells.pop();
 }
 
-ctx.fillStyle = "red";
-ctx.fillRect(apple.x,apple.y,grid-1,grid-1);
+ctx.shadowBlur = 15;
+ctx.shadowColor = "#00ff9d";
 
-ctx.fillStyle = "lime";
+ctx.fillStyle = "#00ff9d";
 
-snake.cells.forEach(function(cell,index){
+snake.cells.forEach((cell,index)=>{
 
-ctx.fillRect(cell.x,cell.y,grid-1,grid-1);
+ctx.fillRect(cell.x,cell.y,grid-2,grid-2);
 
 if(cell.x === apple.x && cell.y === apple.y){
 
-snake.maxCells++;
-
 score++;
-document.getElementById("score").innerText = "Score: " + score;
 
-speed = Math.max(3, speed - 0.2);
+snake.maxCells += 0.7;
 
-apple.x = getRandomInt(0,20)*grid;
-apple.y = getRandomInt(0,20)*grid;
+speed = Math.max(5, speed - 0.3);
+
+apple.x = randomPos();
+apple.y = randomPos();
 
 }
 
-for(let i = index + 1; i < snake.cells.length; i++){
+for(let i=index+1;i<snake.cells.length;i++){
 
 if(cell.x === snake.cells[i].x && cell.y === snake.cells[i].y){
 
-alert("Game Over! Score: " + score);
-resetGame();
+state = "gameover";
+
+if(score > highScore){
+highScore = score;
+localStorage.setItem("snakeHigh",score);
+}
 
 }
 
@@ -108,23 +132,54 @@ resetGame();
 
 });
 
+ctx.shadowBlur = 20;
+ctx.shadowColor = "red";
+ctx.fillStyle = "red";
+
+ctx.fillRect(apple.x,apple.y,grid-2,grid-2);
+
+ctx.shadowBlur = 0;
+
+ctx.fillStyle = "white";
+ctx.font = "16px monospace";
+ctx.fillText("Score: " + score,10,20);
+
+if(state === "gameover"){
+
+ctx.fillStyle = "rgba(0,0,0,0.6)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+drawText("GAME OVER",40,180);
+drawText("Score: " + score,22,220);
+drawText("Press SPACE to restart",18,260);
+
 }
 
-document.addEventListener("keydown",function(e){
+}
+
+document.addEventListener("keydown",(e)=>{
+
+if(state === "start"){
+resetGame();
+}
+
+if(e.code === "Space" && state === "gameover"){
+resetGame();
+}
 
 if(e.key === "ArrowLeft" && snake.dx === 0){
 snake.dx = -grid;
 snake.dy = 0;
 }
 
-else if(e.key === "ArrowUp" && snake.dy === 0){
-snake.dy = -grid;
-snake.dx = 0;
-}
-
 else if(e.key === "ArrowRight" && snake.dx === 0){
 snake.dx = grid;
 snake.dy = 0;
+}
+
+else if(e.key === "ArrowUp" && snake.dy === 0){
+snake.dy = -grid;
+snake.dx = 0;
 }
 
 else if(e.key === "ArrowDown" && snake.dy === 0){
@@ -134,4 +189,4 @@ snake.dx = 0;
 
 });
 
-requestAnimationFrame(loop);
+requestAnimationFrame(gameLoop);
