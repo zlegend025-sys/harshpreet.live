@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 const grid = 20;
 
 let count = 0;
-let speed = 8;
+let speed = 18;
 
 let score = 0;
 
