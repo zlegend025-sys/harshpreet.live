@@ -1,3 +1,22 @@
+function drawRetroBackground(){
+
+const pixel = 20;
+
+for(let x = 0; x < canvas.width; x += pixel){
+for(let y = 0; y < canvas.height; y += pixel){
+
+let noise = Math.sin((x+y+Date.now()*0.05)*0.02);
+
+let brightness = 20 + noise * 20;
+
+ctx.fillStyle = `rgb(${brightness},${brightness+20},${brightness+40})`;
+
+ctx.fillRect(x,y,pixel,pixel);
+
+}
+}
+
+}
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
